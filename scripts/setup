@@ -1,0 +1,50 @@
+#!/bin/bash -e
+
+function warning {
+    echo
+    echo "WARNING: A full rebuild will completely remove photo history."
+    echo
+
+    until [[ "$REPLY" =~ ^[YyNn]$ ]]
+    do
+        read -p "Are you sure? [yn] " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]
+        then
+            echo
+        elif [[ $REPLY =~ ^[Nn]$ ]]
+        then
+            echo
+            echo "Exiting..."
+            echo
+            return 1
+        fi
+    done
+}
+
+
+until [[ "$REPLY" =~ ^[1-2]$ ]]
+do
+    echo
+    echo "incremental build or full rebuild?"
+    echo "1) incremental"
+    echo "2) full"
+    read -p "?" -n 1 -r
+done
+echo
+
+if [[ $REPLY =~ 1 ]]
+then
+    rsync --no-links -r {,_}photos/ &> /dev/null || true
+    rm -rf photos
+    mkdir -p {,_}photos
+
+elif [[ $REPLY =~ 2 ]]
+then
+    warning
+    rm -rf {,_}photos
+    mkdir -p {,}photos
+
+fi
+
+

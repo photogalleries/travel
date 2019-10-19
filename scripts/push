@@ -1,0 +1,99 @@
+#!/bin/bash -e
+
+
+function push_pages {
+   # push gh-pages branch
+   # (fully overwrites previous gh-pages history)
+
+    git init
+    git remote add origin "git@github.com:${1}.git"
+    git checkout -b gh-pages
+
+    touch .nojekyll
+    touch .gitignore
+    echo ".DS_Store" >> .gitignore
+    echo "Icon?" >> .gitignore
+    git add .gitignore
+    git add -A
+    git commit -m "Updated html pages"
+
+    echo "made it here 1"
+
+    # why does push fail?
+    git push -f origin gh-pages || true
+
+    echo "made it here 2"
+
+}
+
+
+function push_photos {
+    # push photos branch
+    # (incremental push)
+
+    echo "made it here 3"
+    echo "$PWD"
+
+    if [ ! -d ".git" ]
+    then
+        git init
+        git remote add origin "git@github.com:${1}.git"
+        echo "made it here 4"
+        git checkout -b photos
+        echo "made it here 5"
+        touch .gitignore
+        echo ".DS_Store" >> .gitignore
+        echo "Icon*" >> .gitignore
+    fi
+
+    echo "made it here 6"
+
+    git add .gitignore
+    git add -A
+    git commit -m "Updated photos"
+    git push -f origin photos
+
+}
+
+
+LOCAL=$1
+REMOTE=$2
+
+
+unset REPLY
+until [[ "$REPLY" =~ ^[yn]$ ]]
+do
+    echo
+    echo "push gh-pages brach? [yn]"
+    read -p "?" -n 1 -r
+done
+echo
+
+
+if [[ $REPLY =~ y ]]
+then
+    cd $LOCAL/_site
+    push_pages $REMOTE
+
+fi
+
+
+unset REPLY
+until [[ "$REPLY" =~ ^[yn]$ ]]
+do
+    echo
+    echo "push photos brach? [yn]"
+    read -p "?" -n 1 -r
+done
+echo
+
+
+if [[ $REPLY =~ y ]]
+then
+    cd $LOCAL/photos
+    push_photos $REMOTE
+
+fi
+
+
+

@@ -1,0 +1,16 @@
+plugins:
+  - jekyll-gallery-generator
+
+
+gallery:
+  dir: "photos"
+  sort_field: "name" 
+  symlink: false
+  title_prefix: ""
+  thumbnail_size:
+    x: 800
+    y: 800
+
+
+  Rome:
+    sort_filed: "name"

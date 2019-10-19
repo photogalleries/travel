@@ -1,0 +1,50 @@
+---
+layout: page
+---
+
+<html>
+<head>
+<title>{{page.title}}</title>
+<link rel="stylesheet" href="../../css/gallery.css" type="text/css"/>
+<link rel="stylesheet" href="../../swipebox/src/css/swipebox.css">
+<link rel="stylesheet" href="https://indestructibletype.com/fonts/fonts.css" type="text/css" charset="utf-8" />
+</head>
+
+
+<body>
+
+    <ul>
+      <li class="no-collapse" style="font-size:18pt">{{page.title}}</li>
+      <li class="collapse" style="padding-top:18px;float:right"><a href="../../galleries.html">&#9776;</a></li>
+    </ul>
+
+    <p style="padding-left:30pt;padding-top:30px;font-size:18pt"><p>
+
+    <div class="gallery">
+    {% for image in page.images %}
+    <div class=gallery-item>
+        <a name="{{ image.name }}"></a>
+        <a href="{{ image.name }}" rel="{{ page.gallery }}" class="swipebox">
+            <img src="thumbs/{{ image.name }}" />
+        </a>
+    </div>
+    {% endfor %}
+
+    <div class=gallery-break>
+    <p style="padding-left:10pt;padding-bottom:30pt"><a href="../../copyright.html"> copyright (c) <script>new Date().getFullYear()>0000&&document.write(""+new Date().getFullYear());</script> RTM</a><br> </p>
+    </div>
+    </div>
+ 
+    <script src="../../swipebox/lib/jquery-2.1.0.min.js"></script>
+    <script src="../../swipebox/src/js/jquery.swipebox.js"></script>
+
+    <script type="text/javascript">
+    $( document ).ready(function() {
+        $( '.swipebox' ).swipebox();
+    });
+    </script>
+
+
+</body>
+
+

@@ -1,0 +1,63 @@
+#!/bin/bash
+
+function build_remote_setup {
+    cp _layouts/gallery_page.html{,~}
+
+    OLD='href="{{ image.name }}" rel="{{ page.gallery }}"'
+    NEW="href=\"https://raw.githubusercontent.com/${1}/photos/{{ page.gallery }}/{{ image.name }}\""
+    sed -i '' -e "s;$OLD;$NEW;" _layouts/gallery_page.html
+
+    OLD='src="thumbs/{{ image.name }}"'
+    NEW="src=\"https://raw.githubusercontent.com/${1}/photos/{{ page.gallery }}/thumbs/{{ image.name }}\""
+    sed -i '' -e "s;$OLD;$NEW;" _layouts/gallery_page.html
+
+
+}
+
+function build_remote_cleanup {
+    rsync -r _site/photos/ _photos --exclude='*.html'
+    rm -rf photos
+    mv {_,}photos
+
+    find _site/photos -name "*.jpg" | gxargs -d '\n' rm
+
+    mv _layouts/gallery_page.html{~,}
+
+}
+
+
+LOCAL=$1
+REMOTE=$2
+
+
+until [[ "$REPLY" =~ ^[1-2]$ ]]
+do
+    echo
+    echo "Create local or remote links?"
+    echo "1) local"
+    echo "2) remote"
+    read -p "?" -n 1 -r
+done
+echo
+
+if [[ $REPLY =~ 1 ]]
+then
+    rm -rf _site
+    bundle exec jekyll build
+
+    # leaves original photos/ unchanged
+    rm -rf photos
+    mv {_,}photos
+
+elif [[ $REPLY =~ 2 ]]
+then
+    rm -rf _site
+    build_remote_setup $REMOTE
+    bundle exec jekyll build
+    build_remote_cleanup
+
+    push $LOCAL $REMOTE
+
+fi
+
+

@@ -1,0 +1,42 @@
+To update website
+-----------------
+
+1. Local Build
+   `./build.bash`
+   when prompted, choose incremental build
+   when prompted, choose local links
+
+
+2. Use browser to inspect `_site/`
+
+
+3. Remote build
+   `./build.bash`
+   when prompted, choose incremental build
+   when prompted, choose remote links
+   when prompted, push gh-pages branch
+   when prompoted, push 
+
+
+
+To install framework
+--------------------
+
+Under macports:
+    default macports ruby (1.8) too old
+    install ruby environment manager rbenv via macports
+    install ruby (2.4) via via rbenv
+    install jekyll prerequisites
+    install jekyll
+    confirm installation via jekyll tutorial
+
+
+
+To prepare photos
+-----------------
+
+Using Adobe Lightroom:
+    crop and adjust raw photos
+    organize photos into collections
+    export 2000px jpegs into directories
+
