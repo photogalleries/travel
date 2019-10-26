@@ -15,7 +15,7 @@ function build_remote_setup {
 }
 
 function build_remote_cleanup {
-    rsync -r _site/photos/ _photos --exclude='*.html'
+    rsync -a --exclude='*.html' _site/photos/ _photos
     rm -rf photos
     mv {_,}photos
 
