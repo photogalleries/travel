@@ -1,0 +1,65 @@
+
+@font-face {
+    font-family: 'AvenirBlack';
+    src:
+        url('../fonts/AvenirLTStd-Black.ttf')
+        format('truetype');
+}
+
+@font-face {
+    font-family: 'AvenirLight';
+    src:
+        url('../fonts/AvenirLTStd-Light.ttf')
+        format('truetype');
+}
+
+@font-face {
+    font-family: 'AvenirMedium';
+    src:
+        url('../fonts/AvenirLTStd-Medium.ttf')
+        format('truetype');
+}
+
+
+@font-face {
+    font-family: 'LucidaTypewriter';
+    src:
+        url('../fonts/LucidaTypewriterStd.otf')
+        format('opentype');
+}
+
+
+h2 {
+    font-family: 'Poppins', 'FuturaNDBold', 'Verdana', 'sans-serif';
+    font-size: 20pt;
+    font-weight: 700;
+}
+
+h3 {
+    font-family: 'Poppins', 'FuturaNDBold', 'Verdana', 'sans-serif';
+    font-size: 16pt;
+    font-weight: 300;
+}
+
+h4 {
+    font-family: 'Poppins', 'FuturaNDMedium', 'Verdana', 'sans-serif';
+    font-size: 14pt;
+    font-weight: 700;
+}
+
+p {
+    font-family: 'AvenirLight';
+    font-size: 13pt;
+    font-weight: 200;
+}
+
+a {
+    color:inherit;
+}
+
+
+body {
+    color:#654a4e;
+    background-color:#f2eeed;
+}
+
